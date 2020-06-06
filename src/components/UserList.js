@@ -2,7 +2,7 @@ import React from 'react';
 import User from './User.js';
 
 const UserList = ({ users }) => {
-  if (users) {
+  if (users.length) {
     return users.map((user, key) => (
       <User user={user} key={key}/>
     ))
