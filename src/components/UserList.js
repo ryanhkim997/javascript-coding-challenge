@@ -1,16 +1,15 @@
 import React from 'react';
+import User from './User.js';
 
 const UserList = ({ users }) => {
   if (users) {
-    return users.map((user, key) => {
-        return (
-        <div key={key}>
-            {user.name} {user.company.name} {user.company.catchPhrase}
-        </div>
-        )
-    })    
+    return users.map((user, key) => (
+      <User user={user} key={key}/>
+    ))    
   } else {
-    return null;
+    return (
+      <div>No Results</div>
+    );
   }
 
 }

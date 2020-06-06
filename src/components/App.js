@@ -16,7 +16,7 @@ const App = () => {
     async function fetchData() {
       try {
         const response = await callAPI();
-        // console.log(response);
+        console.log(response);
         setData(response);
         setUser(response[0].name);
       } catch (error) {
