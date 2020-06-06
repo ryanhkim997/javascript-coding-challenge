@@ -5,8 +5,9 @@ import Search from './Search.js';
 import UserList from './UserList.js';
 
 const App = () => {
-  const [data, setData] = useState(null);
+  const [users, setUsers] = useState([]);
 
+  //gets all users and stores them in users
   const callAPI = () => {
     return fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
@@ -14,16 +15,15 @@ const App = () => {
   };
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchUsers() {
       try {
         const response = await callAPI();
-        console.log(response);
-        setData(response);
+        setUsers(response);
       } catch (error) {
         console.log(error);
       }
     }
-    fetchData();
+    fetchUsers();
   }, []);
 
   return (
@@ -31,8 +31,8 @@ const App = () => {
       <header className="App-header">
         Itinerary
       </header>
-      <Search users={data}/>
-      <UserList users={data}/>
+      <Search users={users}/>
+      <UserList users={users}/>
     </div>
   );
 };

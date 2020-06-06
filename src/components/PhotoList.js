@@ -9,16 +9,16 @@ const PhotoList = () => {
   const [ photos, setPhotos ] = useState([]);
   const [ albums, setAlbums ] = useState([]);
   const [ loading, setLoading ] = useState(true);
-  // const [ photosToShow, setPhotosToShow ] = useState(1);
   const [ currentPage, setCurrentPage ] = useState(1);
   
+  //gets all albums under a given userId
   const getAlbums = () => {
     return fetch(`https://jsonplaceholder.typicode.com/users/${userId}/albums`)
       .then(res => res.json())
       .catch(error => console.log(error))
   };
 
-  //gets all photos under a given userId and merges all separate albums into one array
+  //gets all photos under a given albumId and merges all photos into one array
   const getPhotos = async (albums) => {
     let listOfPhotosBasedOnAlbum = [];
     for (let { id } of albums) {
@@ -62,6 +62,7 @@ const PhotoList = () => {
           })
         }
 
+        {/* These two buttons add pagination functionality, where currentPage represents the current page. */}
         <button onClick={() => {
           if (currentPage > 1) {
             setCurrentPage(currentPage - 1);

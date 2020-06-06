@@ -5,7 +5,7 @@ const User = ({ user }) => {
   return (
     <div>
       <Link to={`/photos/${user.id}`}>
-        {user.name} {user.company.name} {user.company.catchPhrase}      
+        {user.name} || {user.company.name} || {user.company.catchPhrase}      
       </Link>
     </div>
   );
