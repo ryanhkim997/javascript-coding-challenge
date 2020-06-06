@@ -1,9 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const User = ({ user }) => {
   return (
     <div>
-      {user.name} {user.company.name} {user.company.catchPhrase}
+      <Link to={`/photos/${user.id}`}>
+        {user.name} {user.company.name} {user.company.catchPhrase}      
+      </Link>
     </div>
   );
 }
