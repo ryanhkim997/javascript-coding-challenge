@@ -6,7 +6,7 @@ import UserList from './UserList.js';
 
 const App = () => {
   const [ users, setUsers] = useState([]);
-  const [ renderedUsers, setRenderedUsers ] = useState([]);
+  const [ renderedUsers, setRenderedUsers ] = useState([]); //duplicate state, could find a way around this
   const [ searchTerm, setSearchTerm ] = useState('');
   const [ loading, setLoading ] = useState(true);
 
