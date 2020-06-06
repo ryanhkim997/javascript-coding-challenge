@@ -75,3 +75,4 @@ We recommend taking no more than 3 to 4 hours to complete this exercise. Best of
 Please list any assumptions or extra requirements you added to the application while developing below.
 
 - e.g. the JSONPlaceHolder Fake Online API service only allows me to query user's by user ID.
+- Successful API calls to JSONPlaceholder will always yield data with the same structure
