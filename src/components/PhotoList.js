@@ -7,10 +7,12 @@ import '../styles/PhotoList.css';
 const Photos = () => {
   const { userId } = useParams();
   const [ photos, setPhotos ] = useState(null);
+  const [ albums, setAlbums ] = useState(null);
+  const [ loading, setLoading ] = useState(true);
+  const [ photosToShow, setPhotosToShow ] = useState(18);
   const [ firstPhoto, setFirstPhoto ] = useState(null);
   
   const getAlbums = () => {
-    console.log(userId);
     return fetch(`https://jsonplaceholder.typicode.com/users/${userId}/albums`)
       .then(res => res.json())
       .catch(error => console.log(error))
@@ -21,7 +23,7 @@ const Photos = () => {
     for (let { id } of albums) {
       await fetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
         .then(res => res.json())
-        .then(arr => listOfPhotosBasedOnAlbum.push(arr))
+        .then(arr => listOfPhotosBasedOnAlbum = listOfPhotosBasedOnAlbum.concat(arr))
         .catch(error => console.log(error))
     }
     return listOfPhotosBasedOnAlbum;
@@ -32,8 +34,10 @@ const Photos = () => {
       try {
         const albums = await getAlbums();
         const photos = await getPhotos(albums);
+        setAlbums(albums);
         setPhotos(photos);
-        setFirstPhoto(photos[0][0].id)
+        setFirstPhoto(photos[0].id);
+        setLoading(!loading);
       } catch (error) {
         console.log(error)
       }
@@ -43,17 +47,23 @@ const Photos = () => {
   
 
   return (
-    <div>
-      <Link to="/">Return to previous page</Link>
-      {
-        !photos ? 
-        null :
-        photos.map((photo, key) => (
-          photo.map((indiv, index) => (
-            <Photo photo={indiv} key={index}/>
-          ))
-        )) 
-      }
+    loading 
+    ? <div>Loading Photos...</div>
+    : <div>
+        <Link to="/">Return to previous page</Link>
+        {!photos
+          ? null 
+          : photos.slice(0, photosToShow).map((photo, key) => {
+            const albumName = albums.filter(({ id }) => photo.albumId === id)[0].title;
+            return (
+              <Photo photo={photo} albumName={albumName} key={key}/>
+            )
+          })
+        }
+
+        <button onClick={() => setPhotosToShow(photosToShow + 18)}>
+          Show More
+        </button>
     </div>
   );
 }

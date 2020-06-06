@@ -2,11 +2,12 @@ import React from 'react';
 
 import '../styles/Photo.css';
 
-const Photo = ({ photo }) => {
+const Photo = ({ photo, albumName }) => {
   return (
     <div>
-      {photo.title}
-      <img className="userPhotos" src={photo.url} alt=""/>
+      <img className="userPhotos" src={photo.url} alt=""/><br/>
+      {photo.title}<br/>
+      {albumName}
     </div>
   );
 }
