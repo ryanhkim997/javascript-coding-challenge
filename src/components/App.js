@@ -11,7 +11,7 @@ const App = () => {
   const callAPI = () => {
     return fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
-      .catch(err => console.error(err))
+      .catch(error => console.log(error))
   };
 
   useEffect(() => {

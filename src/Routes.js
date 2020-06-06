@@ -6,18 +6,14 @@ import {
 } from 'react-router-dom';
 
 import App from './components/App.js';
-import Photos from './components/Photos.js';
+import PhotoList from './components/PhotoList.js';
 
 const Routes = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/">
-          <App />
-        </Route>
-        <Route path="/photos/:userId">
-          <Photos />
-        </Route>
+        <Route exact path="/" component={App} />
+        <Route path="/photos/:userId" component={PhotoList} />
       </Switch>
     </Router>
   )
