@@ -4,13 +4,13 @@ import { Link, useParams } from 'react-router-dom';
 import Photo from './Photo.js';
 import '../styles/PhotoList.css';
 
-const Photos = () => {
+const PhotoList = () => {
   const { userId } = useParams();
-  const [ photos, setPhotos ] = useState(null);
-  const [ albums, setAlbums ] = useState(null);
+  const [ photos, setPhotos ] = useState([]);
+  const [ albums, setAlbums ] = useState([]);
   const [ loading, setLoading ] = useState(true);
-  const [ photosToShow, setPhotosToShow ] = useState(18);
-  const [ firstPhoto, setFirstPhoto ] = useState(null);
+  // const [ photosToShow, setPhotosToShow ] = useState(1);
+  const [ currentPage, setCurrentPage ] = useState(1);
   
   const getAlbums = () => {
     return fetch(`https://jsonplaceholder.typicode.com/users/${userId}/albums`)
@@ -18,32 +18,33 @@ const Photos = () => {
       .catch(error => console.log(error))
   };
 
+  //gets all photos under a given userId and merges all separate albums into one array
   const getPhotos = async (albums) => {
     let listOfPhotosBasedOnAlbum = [];
     for (let { id } of albums) {
-      await fetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
+      const partialPhotos = await fetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
         .then(res => res.json())
-        .then(arr => listOfPhotosBasedOnAlbum = listOfPhotosBasedOnAlbum.concat(arr))
         .catch(error => console.log(error))
+      listOfPhotosBasedOnAlbum = listOfPhotosBasedOnAlbum.concat(partialPhotos);
     }
     return listOfPhotosBasedOnAlbum;
   }
 
+  //useEffect has a "missing dependency" warning because the component relies on the userId being passed down
   useEffect(() => {
     const getAllPhotos = async () => {
       try {
-        const albums = await getAlbums();
-        const photos = await getPhotos(albums);
-        setAlbums(albums);
-        setPhotos(photos);
-        setFirstPhoto(photos[0].id);
-        setLoading(!loading);
+        const albumList = await getAlbums();
+        const flattenedPhotos = await getPhotos(albumList);
+        setAlbums(albumList);
+        setPhotos(flattenedPhotos);
+        setLoading(false);
       } catch (error) {
         console.log(error)
       }
     }
     getAllPhotos();
-  }, [ firstPhoto ])
+  }, [])
   
 
   return (
@@ -53,7 +54,7 @@ const Photos = () => {
         <Link to="/">Return to previous page</Link>
         {!photos
           ? null 
-          : photos.slice(0, photosToShow).map((photo, key) => {
+          : photos.slice((currentPage - 1) * 18, currentPage * 18).map((photo, key) => {
             const albumName = albums.filter(({ id }) => photo.albumId === id)[0].title;
             return (
               <Photo photo={photo} albumName={albumName} key={key}/>
@@ -61,11 +62,23 @@ const Photos = () => {
           })
         }
 
-        <button onClick={() => setPhotosToShow(photosToShow + 18)}>
-          Show More
+        <button onClick={() => {
+          if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+          }
+        }}>
+          Previous
+        </button>
+        <span>Current Page: {currentPage}</span>
+        <button onClick={() => {
+          if (currentPage * 18 < photos.length) {
+            setCurrentPage(currentPage + 1);
+          }
+        }}>
+          Next
         </button>
     </div>
   );
 }
 
-export default Photos;
+export default PhotoList;

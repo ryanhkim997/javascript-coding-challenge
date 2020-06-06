@@ -7,6 +7,7 @@ const Photo = ({ photo, albumName }) => {
     <div>
       <img className="userPhotos" src={photo.url} alt=""/><br/>
       {photo.title}<br/>
+      {/* {photo.id}<br/> */}
       {albumName}
     </div>
   );
