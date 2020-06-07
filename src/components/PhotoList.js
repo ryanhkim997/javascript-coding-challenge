@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Photo from './Photo.js';
 import '../styles/PhotoList.css';
 
-const PhotoList = ({ match }) => {
-  const { userId } = useParams();
+const PhotoList = (props) => {
+  const { name, userId } = props.location.state;
   const [ photos, setPhotos ] = useState([]);
   const [ albums, setAlbums ] = useState([]);
   const [ loading, setLoading ] = useState(true);
   const [ currentPage, setCurrentPage ] = useState(1);
   
+  
   //gets all albums under a given userId
-  const getAlbums = () => {
-    return fetch(`https://jsonplaceholder.typicode.com/users/${userId}/albums`)
+  const getAlbums = (id) => {
+    console.log('getAlbums called!')
+    return fetch(`https://jsonplaceholder.typicode.com/users/${id}/albums`)
       .then(res => res.json())
       .catch(error => console.log(error))
   };
 
   //gets all photos under a given albumId and merges all photos into one array
   const getPhotos = async (albums) => {
+    console.log('getPhotos called!')
     let listOfPhotosBasedOnAlbum = [];
-    
+
     for (let { id } of albums) {
       const partialPhotos = await fetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
         .then(res => res.json())
@@ -35,7 +38,7 @@ const PhotoList = ({ match }) => {
   useEffect(() => {
     const getAllPhotos = async () => {
       try {
-        const albumList = await getAlbums();
+        const albumList = await getAlbums(userId);
         const flattenedPhotos = await getPhotos(albumList);
         setAlbums(albumList);
         setPhotos(flattenedPhotos);
@@ -45,7 +48,7 @@ const PhotoList = ({ match }) => {
       }
     }
     getAllPhotos();
-  }, [])
+  }, [ userId ])
   
 
   return (
@@ -53,6 +56,8 @@ const PhotoList = ({ match }) => {
     ? <div>Loading Photos...</div>
     : <div>
         <Link to="/">Return to previous page</Link>
+        <br/>
+        {name}
         {!photos
           ? null
           //shows 18 photos per page (ex. first page would span from indices [0, 18) where the upper bound is exclusive)
