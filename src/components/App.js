@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import '../styles/App.css';
 import UserList from './UserList.js';
+import Search from './Search.js';
+import '../styles/App.css';
 
 const App = () => {
   const [ users, setUsers] = useState([]);
@@ -48,7 +49,7 @@ const App = () => {
       <header className="App-header">
         Itinerary
       </header>
-      <form id="searchBar" onSubmit={(e) => {
+      {/* <form id="searchBar" onSubmit={(e) => {
         handleSearch(searchTerm);
         e.preventDefault();
       }}>
@@ -65,7 +66,14 @@ const App = () => {
             setRenderedUsers(users); // Changes rendered users back to original users from the API call on page load
             document.getElementById('searchBar').reset();
           }}/>
-      </form>
+      </form> */}
+      <Search
+        users={users}
+        searchTerm={searchTerm}
+        setRenderedUsers={setRenderedUsers}
+        setSearchTerm={setSearchTerm}
+        handleSearch={handleSearch}
+      />
       <UserList users={renderedUsers}/>
     </div>
   );

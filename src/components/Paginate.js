@@ -1,19 +1,18 @@
 import React from 'react';
 
-const Paginate = ({ currentPage, photos, handlePageChange }) => {
-  
+const Paginate = ({ currentPage, photos, setCurrentPage }) => {
   return (
     <div>
       <button onClick={() => {
         if (currentPage > 1) {
-          handlePageChange(currentPage - 1);
+          setCurrentPage(currentPage - 1);
         }
       }}>
         Previous
       </button>
       <span>
         Current Page: 
-        <select value={currentPage} onChange={(e) => handlePageChange(e.target.value)}>
+        <select value={currentPage} onChange={(e) => setCurrentPage(Number(e.target.value))}>
           {photos.map((val, i) => {
             const countPage = i * 18;
             return (
@@ -26,7 +25,7 @@ const Paginate = ({ currentPage, photos, handlePageChange }) => {
       </span>
       <button onClick={() => {
         if (currentPage * 18 < photos.length) {
-          handlePageChange(currentPage + 1);
+          setCurrentPage(currentPage + 1);
         }
       }}>
         Next

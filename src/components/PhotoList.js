@@ -12,7 +12,6 @@ const PhotoList = (props) => {
   const [ loading, setLoading ] = useState(true);
   const [ currentPage, setCurrentPage ] = useState(1);
   
-  
   /*
   * Gets all albums under a given userId
   */
@@ -36,10 +35,6 @@ const PhotoList = (props) => {
     return Promise.all(promises)
       .then(photos => photos.reduce((acc, cV) => acc.concat(cV)))
       .catch(error => console.log(error))
-  }
-
-  const handlePageChange = (newVal) => {
-    setCurrentPage(newVal);
   }
 
   /*
@@ -81,7 +76,7 @@ const PhotoList = (props) => {
         <Paginate 
           currentPage={currentPage}
           photos={photos}
-          handlePageChange={handlePageChange}
+          setCurrentPage={setCurrentPage}
         />
     </div>
   );

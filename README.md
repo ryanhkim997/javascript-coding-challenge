@@ -79,7 +79,8 @@ Please list any assumptions or extra requirements you added to the application w
 - Refrained from building class components, instead opting for functional components and maintaining state through React Hooks
 - Opted to work with provided boilerplate code and not build out separate server-side functionality
   - Thus, React Router (dependency 'react-router-dom') installed to enable client-side routing
-- Successful API calls to JSONPlaceholder will always yield data with the same structure
-  - JSONPlaceholder API will support nested routes /users/userId/albums and /albums/albumId/photos
-  - Since the request for photos is dependent on a successful request for albums, it is assumed that API requests will be successful and that JSONPlaceholder is up and running
+- Successful API calls to JSONPlaceHolder will always yield data with the same structure
+  - JSONPlaceHolder API will support nested routes /users/userId/albums and /albums/albumId/photos
+  - Since the request for photos is dependent on a successful request for albums, it is assumed that API requests will be successful and that JSONPlaceHolder is up and running
 - Pagination requires only that we can see the previous page and next page, as well as choose the exact page to jump to. 'Skip to beginning/end' functionality has not been built out
+- As of 8:27AM PST on 6/7/20, multiple endpoints on the JSONPlaceHolder API do not work, even when tested on Postman (status code 520). This has been a recurring issue. When running the application please make sure to try clicking on multiple users so as to not run into this issue.
