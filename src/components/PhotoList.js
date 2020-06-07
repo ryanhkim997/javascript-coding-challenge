@@ -73,7 +73,6 @@ const PhotoList = (props) => {
               );
           })
         }
-        {/* These two buttons add pagination functionality, where currentPage represents the current page. */}
         <button onClick={() => {
           if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
@@ -81,7 +80,19 @@ const PhotoList = (props) => {
         }}>
           Previous
         </button>
-        <span>Current Page: {currentPage}</span>
+        <span>
+          Current Page: 
+          <select value={currentPage} onChange={(e) => setCurrentPage(e.target.value)}>
+            {photos.map((val, i) => {
+              const countPage = i * 18;
+              return (
+                countPage < photos.length 
+                ? <option key={i}>{i + 1}</option>
+                : null
+              );
+            })}
+          </select>
+        </span>
         <button onClick={() => {
           if (currentPage * 18 < photos.length) {
             setCurrentPage(currentPage + 1);

@@ -54,7 +54,11 @@ const App = () => {
       }}>
         <label>
           Search User
-          <input type="text" onChange={(e) => setSearchTerm(e.target.value)}/>
+          <input
+            type="text" 
+            placeholder="Search by User's Name" 
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </label>
           <input type="submit" value="Search"/>
           <input type="button" value="Cancel" onClick={() => {
