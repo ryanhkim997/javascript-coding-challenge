@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Photo from './Photo.js';
+import Paginate from './Paginate.js';
 import '../styles/PhotoList.css';
 
 const PhotoList = (props) => {
@@ -35,6 +36,10 @@ const PhotoList = (props) => {
     return Promise.all(promises)
       .then(photos => photos.reduce((acc, cV) => acc.concat(cV)))
       .catch(error => console.log(error))
+  }
+
+  const handlePageChange = (newVal) => {
+    setCurrentPage(newVal);
   }
 
   /*
@@ -73,33 +78,11 @@ const PhotoList = (props) => {
               );
           })
         }
-        <button onClick={() => {
-          if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-          }
-        }}>
-          Previous
-        </button>
-        <span>
-          Current Page: 
-          <select value={currentPage} onChange={(e) => setCurrentPage(e.target.value)}>
-            {photos.map((val, i) => {
-              const countPage = i * 18;
-              return (
-                countPage < photos.length 
-                ? <option key={i}>{i + 1}</option>
-                : null
-              );
-            })}
-          </select>
-        </span>
-        <button onClick={() => {
-          if (currentPage * 18 < photos.length) {
-            setCurrentPage(currentPage + 1);
-          }
-        }}>
-          Next
-        </button>
+        <Paginate 
+          currentPage={currentPage}
+          photos={photos}
+          handlePageChange={handlePageChange}
+        />
     </div>
   );
 }
