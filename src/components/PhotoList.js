@@ -57,28 +57,35 @@ const PhotoList = (props) => {
   
 
   return (
-    loading 
-    ? <div>Loading Photos...</div>
-    : <div>
-        <Link to="/">Return to previous page</Link>
-        <br/>
-        {name}
-        {!photos
-          ? null
-          // Shows 18 photos per page (ex. first page would span from indices [0, 18) of the photos array)
-          : photos.slice((currentPage - 1) * 18, currentPage * 18).map((photo, key) => {
-              const albumName = albums.filter(({ id }) => photo.albumId === id)[0].title;
-              return (
-                <Photo photo={photo} albumName={albumName} key={key}/>
-              );
-          })
-        }
-        <Paginate 
-          currentPage={currentPage}
-          photos={photos}
-          setCurrentPage={setCurrentPage}
-        />
+    <div>
+      {loading 
+      ? <div>Loading Photos...</div>
+      : <div>
+          <Link to="/">Return to previous page</Link>
+          <br/>
+          <header>
+
+          {`${name}'s Photos`}
+          </header>
+          {!photos
+            ? null
+            // Shows 18 photos per page (ex. first page would span from indices [0, 18) of the photos array)
+            : photos.slice((currentPage - 1) * 18, currentPage * 18).map((photo, key) => {
+                const albumName = albums.filter(({ id }) => photo.albumId === id)[0].title;
+                return (
+                  <Photo photo={photo} albumName={albumName} key={key}/>
+                );
+            })
+          }
+          <Paginate 
+            currentPage={currentPage}
+            photos={photos}
+            setCurrentPage={setCurrentPage}
+          />
+      </div>  
+      }    
     </div>
+
   );
 }
 

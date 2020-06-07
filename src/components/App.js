@@ -43,39 +43,25 @@ const App = () => {
   }, []);
 
   return (
-    loading
-    ? <div>Loading Users...</div>
-    : <div className="App">
-      <header className="App-header">
-        Itinerary
-      </header>
-      {/* <form id="searchBar" onSubmit={(e) => {
-        handleSearch(searchTerm);
-        e.preventDefault();
-      }}>
-        <label>
-          Search User
-          <input
-            type="text" 
-            placeholder="Search by User's Name" 
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </label>
-          <input type="submit" value="Search"/>
-          <input type="button" value="Cancel" onClick={() => {
-            setRenderedUsers(users); // Changes rendered users back to original users from the API call on page load
-            document.getElementById('searchBar').reset();
-          }}/>
-      </form> */}
-      <Search
-        users={users}
-        searchTerm={searchTerm}
-        setRenderedUsers={setRenderedUsers}
-        setSearchTerm={setSearchTerm}
-        handleSearch={handleSearch}
-      />
-      <UserList users={renderedUsers}/>
+    <div className="App">
+      {loading
+      ? <div id="loadSign">Loading Users...</div>
+      : <div>
+        <header className="App-header">
+          Home
+        </header>
+        <Search
+          users={users}
+          searchTerm={searchTerm}
+          setRenderedUsers={setRenderedUsers}
+          setSearchTerm={setSearchTerm}
+          handleSearch={handleSearch}
+        />
+        <UserList users={renderedUsers}/>
+      </div>
+      }      
     </div>
+
   );
 };
 

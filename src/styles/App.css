@@ -1,6 +1,15 @@
 .App {
   text-align: center;
-  /* font-size: calc(10px + 2vmin); */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 20%;
+}
+
+#loadSign {
+  margin-top: 20%;
+  font-size: calc(10px + 3vmin);
+  font-weight: bold;
 }
 
 .App-header {
@@ -11,5 +20,8 @@
   align-items: center;
   justify-content: center;
   color: white; */
-  font-size: calc(10px + 2vmin);
+  font-size: calc(12px + 2vmin);
+  font-weight: bold;
+  margin-top: 1.5%;
+  margin-bottom: 1.7%;
 }

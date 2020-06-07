@@ -1,0 +1,29 @@
+.User {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  border: .1rem solid black;
+  text-decoration: none;
+  color: black;
+  margin: 0.8% 23%;
+}
+
+.User:hover {
+  background-color: rgb(216, 216, 216);
+}
+
+.userName {
+  align-self: flex-start;
+  margin-left: 1.5%;
+  margin-top: 1%;
+}
+
+.company {
+  margin-right: 1.5%;
+}
+
+.catchPhrase {
+  margin-right: 1.5%;
+  margin-bottom: 1.5%;
+}

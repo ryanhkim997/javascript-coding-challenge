@@ -1,13 +1,19 @@
 import React from 'react';
+
 import User from './User.js';
+import '../styles/UserList.css';
 
 const UserList = ({ users }) => {
   return (
-    !users.length
-    ? <div>No results</div>
-    : users.map((user, key) => (
-        <User user={user} key={key}/>
-      ))
+    <div className="UserList">
+      {!users.length
+      ? <div className="emptySearch">No results</div>
+      : users.map((user, key) => (
+          <User user={user} key={key}/>
+        ))
+      }
+    </div>
+
   );
 }
 

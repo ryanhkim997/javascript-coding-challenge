@@ -1,0 +1,13 @@
+.Search {
+  margin: 0.8% 25%;
+  
+}
+
+/* #searchBar {
+  width: 100%;
+} */
+
+input[type=text] {
+  padding: 30%;
+  margin: 40%;
+}

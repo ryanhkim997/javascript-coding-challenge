@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../styles/Paginate.css';
+
 const Paginate = ({ currentPage, photos, setCurrentPage }) => {
   return (
     <div>
@@ -12,7 +14,7 @@ const Paginate = ({ currentPage, photos, setCurrentPage }) => {
       </button>
       <span>
         Current Page: 
-        <select value={currentPage} onChange={(e) => setCurrentPage(Number(e.target.value))}>
+        <select value={currentPage} onChange={(e) => setCurrentPage(Number(e.target.value))}> {/* string => number */}
           {photos.map((val, i) => {
             const countPage = i * 18;
             return (
