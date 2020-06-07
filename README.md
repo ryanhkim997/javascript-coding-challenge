@@ -75,4 +75,11 @@ We recommend taking no more than 3 to 4 hours to complete this exercise. Best of
 Please list any assumptions or extra requirements you added to the application while developing below.
 
 - e.g. the JSONPlaceHolder Fake Online API service only allows me to query user's by user ID.
+
+- Refrained from building class components, instead opting for functional components and maintaining state through React Hooks
+- Opted to work with provided boilerplate code and not build out separate server-side functionality
+  - Thus, React Router (dependency 'react-router-dom') installed to enable client-side routing
 - Successful API calls to JSONPlaceholder will always yield data with the same structure
+  - JSONPlaceholder API will support nested routes /users/userId/albums and /albums/albumId/photos
+  - Since the request for photos is dependent on a successful request for albums, it is assumed that API requests will be successful and that JSONPlaceholder is up and running
+- Pagination requires only that we can see the previous page and next page, as well as choose the exact page to jump to. 'Skip to beginning/end' functionality has not been built out

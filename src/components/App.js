@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react';
 
 import '../styles/App.css';
-// import Search from './Search.js';
 import UserList from './UserList.js';
 
 const App = () => {
   const [ users, setUsers] = useState([]);
-  const [ renderedUsers, setRenderedUsers ] = useState([]); //duplicate state, could find a way around this
+  const [ renderedUsers, setRenderedUsers ] = useState([]); // Duplicate state to accommodate for search functionality
   const [ searchTerm, setSearchTerm ] = useState('');
   const [ loading, setLoading ] = useState(true);
 
-  //gets all users and stores them in users
+  /*
+  * Gets all users
+  */
   const getUsers = () => {
     return fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
       .catch(error => console.log(error))
   };
   
-  //handles search (case-agnostic)
+  /*
+  * Handles search using filter() array method (case-agnostic)
+  */
   const handleSearch = (term) => {
     const caselessTerm = term.toLowerCase();
     const filteredUsers = users.filter(({ name }) => name.toLowerCase().includes(caselessTerm))
@@ -55,7 +58,7 @@ const App = () => {
         </label>
           <input type="submit" value="Search"/>
           <input type="button" value="Cancel" onClick={() => {
-            setRenderedUsers(users);
+            setRenderedUsers(users); // Changes rendered users back to original users from the API call on page load
             document.getElementById('searchBar').reset();
           }}/>
       </form>
