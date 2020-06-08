@@ -1,8 +1,9 @@
 import React from 'react';
 
+import '../styles/Search.css';
+
 const Search = ({ users, searchTerm, setRenderedUsers, handleSearch, setSearchTerm }) => {
   return (
-    <div className="Search">
       <form id="searchBar" onSubmit={(e) => {
       handleSearch(searchTerm);
       e.preventDefault();
@@ -15,14 +16,12 @@ const Search = ({ users, searchTerm, setRenderedUsers, handleSearch, setSearchTe
           onChange={(e) => setSearchTerm(e.target.value)}
           />
       </label>
-          <input type="submit" value="Search"/>
-          <input type="button" value="Cancel" onClick={() => {
+          <input className="submit-search" type="submit" value="Search"/>
+          <input className="cancel-search" type="button" value="Cancel" onClick={() => {
           setRenderedUsers(users); // Changes rendered users back to original users from the API call on page load
           document.getElementById('searchBar').reset();
           }}/>
       </form>
-    </div>
-
   );
 }
 

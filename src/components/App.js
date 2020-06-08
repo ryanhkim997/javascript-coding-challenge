@@ -25,7 +25,7 @@ const App = () => {
   const handleSearch = (term) => {
     const caselessTerm = term.toLowerCase();
     const filteredUsers = users.filter(({ name }) => name.toLowerCase().includes(caselessTerm))
-    setRenderedUsers(filteredUsers); //case where no users match is handled in UserList component
+    setRenderedUsers(filteredUsers); // Case where no users match is handled in UserList component
   }
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const App = () => {
     <div className="App">
       {loading
       ? <div className="loadSign">Loading Users...</div>
-      : <div>
+      : <div className="App-container">
         <header className="App-header">
           Home
         </header>

@@ -1,13 +1,19 @@
-.Search {
-  margin: 0.8% 25%;
-  width: 300%;
+#searchBar {
+  margin: 0.8% 20%;
 }
 
-/* #searchBar {
-  width: 100%;
-} */
+.submit-search {
+  margin-left: 1%;
+  margin-right: 0.5%;
+  padding: 1%;
+}
+
+.cancel-search {
+  margin-left: 0.25%;
+  padding: 1%;
+}
 
 input[type=text] {
-  padding: 30%;
-  margin: 40%;
+  padding: 1% 0;
+  width: 68%;
 }

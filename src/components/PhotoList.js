@@ -16,7 +16,6 @@ const PhotoList = (props) => {
   * Gets all albums under a given userId
   */
   const getAlbums = (id) => {
-    // console.log('getAlbums called!')
     return fetch(`https://jsonplaceholder.typicode.com/users/${id}/albums`)
       .then(res => res.json())
       .catch(error => console.log(error))
@@ -26,7 +25,6 @@ const PhotoList = (props) => {
   * Gets all photos under a given albumId and merges all photos into one array
   */
   const getPhotos = async (albums) => {
-    // console.log('getPhotos called!')
     const promises = albums.map(({ id }) => {
       return fetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
         .then(res => res.json())
@@ -38,7 +36,10 @@ const PhotoList = (props) => {
   }
 
   /*
-  * By placing userId in the dependency array, a warning that was previously there is gone but the API calls are made twice each.
+  * 1. API call for list of album ID's and titles given 
+  * 2. API call for list of photos given album ID's, yielding a nested array of arrays (resolved Promises)
+  * 3. These arrays are reduced into one array, which is set as photos.
+  * 4. Loading state is set to false and the photos are rendered.
   */
   useEffect(() => {
     const getAllPhotos = async () => {

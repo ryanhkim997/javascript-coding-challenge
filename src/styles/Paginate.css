@@ -1,0 +1,15 @@
+.Paginate {
+  font-size: calc(8px + 1vmin)
+}
+
+.prev-button {
+  margin: 1%;
+}
+
+.next-button {
+  margin: 1%;
+}
+
+.page-select {
+  margin-left: 0.5%;
+}

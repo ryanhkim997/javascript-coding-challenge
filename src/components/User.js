@@ -13,7 +13,7 @@ const User = ({ user }) => {
           userId: user.id
         }
       }}>
-        <div className="userName">{user.name}</div>
+        <h3 className="userName">{user.name}</h3>
         <div className="company">{user.company.name}</div>
         <div className="catchPhrase">{user.company.catchPhrase}</div>     
       </Link>

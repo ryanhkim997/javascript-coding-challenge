@@ -3,7 +3,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 20%;
+  margin: 0 15%;
+}
+
+.App-container {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: column;
 }
 
 .loadSign {
@@ -13,13 +19,6 @@
 }
 
 .App-header {
-  /* background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white; */
   font-size: calc(12px + 2vmin);
   font-weight: bold;
   margin-top: 1.5%;

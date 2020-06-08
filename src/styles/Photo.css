@@ -18,6 +18,13 @@
   padding: 0 15%;
 }
 
+#photoTitle {
+  margin: 5% 0;
+  font-size: calc(10px + 1vmin);
+  font-weight: bold;
+}
+
 #albumName {
+  font-size: calc(8px + 1vmin);
   font-style: italic 
 }
