@@ -65,7 +65,7 @@ const PhotoList = (props) => {
           <header className="PhotoList-header">
             <Link  to="/">Return to previous page</Link>            
           </header>
-          <h2>{`${name}'s Photos`}</h2>
+          <h1>{`${name}'s Photos`}</h1>
           {!photos
             ? null
             // Shows 18 photos per page (ex. first page would span from indices [0, 18) of the photos array)
