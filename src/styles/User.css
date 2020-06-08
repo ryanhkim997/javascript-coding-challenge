@@ -5,6 +5,7 @@
   align-items: flex-end;
   border: .1rem solid black;
   text-decoration: none;
+  font-size: calc(4px + 1vmin);
   color: black;
   margin: 0.8% 23%;
 }

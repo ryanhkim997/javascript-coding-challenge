@@ -45,7 +45,7 @@ const App = () => {
   return (
     <div className="App">
       {loading
-      ? <div id="loadSign">Loading Users...</div>
+      ? <div className="loadSign">Loading Users...</div>
       : <div>
         <header className="App-header">
           Home

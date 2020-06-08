@@ -1,4 +1,23 @@
+.Photo {
+  width: 33%;
+  height: 18%;
+  display: inline-block;
+}
+
 .userPhotos {
-  max-width: 200px;
-  max-height: 200px;
+  width: auto;
+  height: auto;
+  max-width: 70%;
+  max-height: 70%;
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  padding: 0 15%;
+}
+
+#albumName {
+  font-style: italic 
 }

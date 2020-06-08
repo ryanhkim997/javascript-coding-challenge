@@ -16,7 +16,7 @@ const PhotoList = (props) => {
   * Gets all albums under a given userId
   */
   const getAlbums = (id) => {
-    console.log('getAlbums called!')
+    // console.log('getAlbums called!')
     return fetch(`https://jsonplaceholder.typicode.com/users/${id}/albums`)
       .then(res => res.json())
       .catch(error => console.log(error))
@@ -26,7 +26,7 @@ const PhotoList = (props) => {
   * Gets all photos under a given albumId and merges all photos into one array
   */
   const getPhotos = async (albums) => {
-    console.log('getPhotos called!')
+    // console.log('getPhotos called!')
     const promises = albums.map(({ id }) => {
       return fetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
         .then(res => res.json())
@@ -57,16 +57,14 @@ const PhotoList = (props) => {
   
 
   return (
-    <div>
+    <div className="PhotoList">
       {loading 
-      ? <div>Loading Photos...</div>
-      : <div>
-          <Link to="/">Return to previous page</Link>
-          <br/>
-          <header>
-
-          {`${name}'s Photos`}
+      ? <div className="loadSign">Loading Photos...</div>
+      : <div className="photosContainer">
+          <header className="PhotoList-header">
+            <Link  to="/">Return to previous page</Link>            
           </header>
+          <h2>{`${name}'s Photos`}</h2>
           {!photos
             ? null
             // Shows 18 photos per page (ex. first page would span from indices [0, 18) of the photos array)

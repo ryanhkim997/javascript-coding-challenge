@@ -1,3 +1,16 @@
-.Photos {
+.PhotoList {
+  width: 100%;
+  display: inline-flex;
   text-align: center;
+  justify-content: center;
+}
+
+.photosContainer {
+  width: 100%;
+}
+
+.PhotoList-header {
+  font-size: calc(7px + 1vmin);
+  margin-left: 1%;
+  text-align: left;
 }

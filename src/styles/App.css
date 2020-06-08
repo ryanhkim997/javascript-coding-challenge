@@ -6,7 +6,7 @@
   margin: 0 20%;
 }
 
-#loadSign {
+.loadSign {
   margin-top: 20%;
   font-size: calc(10px + 3vmin);
   font-weight: bold;
