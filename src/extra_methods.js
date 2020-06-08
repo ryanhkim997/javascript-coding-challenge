@@ -7,7 +7,7 @@ module.exports = {
     return Promise.race([
       fetch(url),
       new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Timeout')), timeout)
+        setTimeout(() => reject(new Error('Request Timed Out!')), timeout)
       )
     ])
   },
