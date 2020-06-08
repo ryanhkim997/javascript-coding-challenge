@@ -8,6 +8,7 @@ const App = () => {
   const [ users, setUsers] = useState([]);
   const [ renderedUsers, setRenderedUsers ] = useState([]); // Duplicate state to accommodate for search functionality
   const [ searchTerm, setSearchTerm ] = useState('');
+  const [ error, setError ] = useState(null);
   const [ loading, setLoading ] = useState(true);
 
   /*
@@ -16,7 +17,26 @@ const App = () => {
   const getUsers = () => {
     return fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
-      .catch(error => console.log(error))
+      .catch(error => {
+        /*
+        * Handles API call errors
+        * 1. First conditional block handles any sort of response code outside of 2xx range
+        * 2. Second conditional block handles a client-side request error
+        * 3. Else block handles any other errors
+        * NOTE: This error handling pattern has been copied over into any other component that makes API calls (PhotoList)
+        */
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log(error.message);
+        }
+        setLoading(false);
+        setError(error.message);
+      })
   };
   
   /*
@@ -42,6 +62,13 @@ const App = () => {
     fetchUsers();
   }, []);
 
+  if (error) {
+    return (
+      <div className="errorPage">
+        <div className="errorMsg">{`${error} 😞`}</div>
+      </div>
+    );
+  }
   return (
     <div className="App">
       {loading

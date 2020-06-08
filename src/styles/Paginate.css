@@ -1,15 +1,19 @@
 .Paginate {
-  font-size: calc(8px + 1vmin)
+  margin: 10% 0;
+  font-size: calc(12px + 1vmin);
 }
 
 .prev-button {
+  font-size: calc(12px + 1vmin);
   margin: 1%;
 }
 
 .next-button {
+  font-size: calc(12px + 1vmin);
   margin: 1%;
 }
 
 .page-select {
+  font-size: calc(12px + 1vmin);
   margin-left: 0.5%;
 }

@@ -11,6 +11,7 @@ const PhotoList = (props) => {
   const [ albums, setAlbums ] = useState([]);
   const [ loading, setLoading ] = useState(true);
   const [ currentPage, setCurrentPage ] = useState(1);
+  const [ error, setError ] = useState(null);
   
   /*
   * Gets all albums under a given userId
@@ -18,7 +19,20 @@ const PhotoList = (props) => {
   const getAlbums = (id) => {
     return fetch(`https://jsonplaceholder.typicode.com/users/${id}/albums`)
       .then(res => res.json())
-      .catch(error => console.log(error))
+      .catch(error => {
+        // Consult comments in App.js (lines 21-27 for details on error handling)
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log(error.message);
+        }
+        setLoading(false);
+        setError(error.message)
+      })
   };
 
   /*
@@ -28,7 +42,20 @@ const PhotoList = (props) => {
     const promises = albums.map(({ id }) => {
       return fetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
         .then(res => res.json())
-        .catch(error => console.log(error))
+        // Consult comments in App.js (lines 21-27 for details on error handling)
+        .catch(error => {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log(error.message);
+          }
+          setLoading(false);
+          setError(error.message)
+        })
     })
     return Promise.all(promises)
       .then(photos => photos.reduce((acc, cV) => acc.concat(cV)))
@@ -50,23 +77,31 @@ const PhotoList = (props) => {
         setPhotos(flattenedPhotos);
         setLoading(false);
       } catch (error) {
-        console.log(error)
+
       }
     }
     getAllPhotos();
   }, [ userId ])
   
-
-  return (
+  if (error) {
+    return (
+      <div className="errorPage">
+        <header className="error-header">
+          <Link to="/">Return to previous page</Link>
+        </header>
+        <div className="errorMsg">{`${error} 😞`}</div>
+      </div>
+    ) 
+  } else return (
     <div className="PhotoList">
       {loading 
       ? <div className="loadSign">Loading Photos...</div>
       : <div className="photosContainer">
           <header className="PhotoList-header">
-            <Link  to="/">Return to previous page</Link>            
+            <Link to="/">Return to previous page</Link>
           </header>
           <h1>{`${name}'s Photos`}</h1>
-          {!photos
+          {!photos.length
             ? null
             // Shows 18 photos per page (ex. first page would span from indices [0, 18) of the photos array)
             : photos.slice((currentPage - 1) * 18, currentPage * 18).map((photo, key) => {
@@ -84,7 +119,6 @@ const PhotoList = (props) => {
       </div>  
       }    
     </div>
-
   );
 }
 

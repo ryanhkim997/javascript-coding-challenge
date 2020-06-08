@@ -14,3 +14,13 @@
   margin-left: 1%;
   text-align: left;
 }
+
+.errorPage {
+  margin-left: 1%;
+}
+
+.errorMsg {
+  font-weight: bold;
+  font-size: calc(12px + 2vmin);
+  text-align: center;
+}

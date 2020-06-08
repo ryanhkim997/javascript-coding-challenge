@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 15%;
+  margin: 0 5%;
 }
 
 .App-container {
@@ -23,4 +23,14 @@
   font-weight: bold;
   margin-top: 1.5%;
   margin-bottom: 1.7%;
+}
+
+.errorPage {
+  margin-left: 1%;
+}
+
+.errorMsg {
+  font-weight: bold;
+  font-size: calc(12px + 2vmin);
+  text-align: center;
 }
