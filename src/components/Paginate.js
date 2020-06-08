@@ -17,7 +17,7 @@ const Paginate = ({ currentPage, photos, setCurrentPage }) => {
         Current Page:
         {/* Allows for user to choose any page to skip to */}
         <select className="page-select" value={currentPage} onChange={(e) => setCurrentPage(Number(e.target.value))}> {/* string => number */}
-          {photos.map((val, i) => {
+          {photos.map((_, i) => {
             const countPage = i * 18;
             return (
               countPage < photos.length 

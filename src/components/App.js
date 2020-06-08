@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import UserList from './UserList.js';
 import Search from './Search.js';
+import { fetchWithTimeout, requestErrorHandler } from '../extra_methods.js';
 import '../styles/App.css';
 
 const App = () => {
@@ -15,25 +16,12 @@ const App = () => {
   * Gets all users
   */
   const getUsers = () => {
-    return fetch('https://jsonplaceholder.typicode.com/users')
+    const url = `https://jsonplaceholder.typicode.com/users`;
+
+    return fetchWithTimeout(url, 15000)
       .then(res => res.json())
       .catch(error => {
-        /*
-        * Handles API call errors
-        * 1. First conditional block handles any sort of response code outside of 2xx range
-        * 2. Second conditional block handles a client-side request error
-        * 3. Else block handles any other errors
-        * NOTE: This error handling pattern has been copied over into any other component that makes API calls (PhotoList)
-        */
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log(error.message);
-        }
+        requestErrorHandler(error);
         setLoading(false);
         setError(error.message);
       })

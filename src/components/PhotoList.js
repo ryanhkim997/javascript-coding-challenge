@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Photo from './Photo.js';
 import Paginate from './Paginate.js';
+import { fetchWithTimeout, requestErrorHandler } from '../extra_methods.js'
 import '../styles/PhotoList.css';
 
 const PhotoList = (props) => {
@@ -17,21 +18,14 @@ const PhotoList = (props) => {
   * Gets all albums under a given userId
   */
   const getAlbums = (id) => {
-    return fetch(`https://jsonplaceholder.typicode.com/users/${id}/albums`)
+    const url = `https://jsonplaceholder.typicode.com/users/${id}/albums`;
+
+    return fetchWithTimeout(url, 15000)
       .then(res => res.json())
       .catch(error => {
-        // Consult comments in App.js (lines 21-27 for details on error handling)
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log(error.message);
-        }
+        requestErrorHandler(error);
         setLoading(false);
-        setError(error.message)
+        setError(error.message);
       })
   };
 
@@ -40,21 +34,14 @@ const PhotoList = (props) => {
   */
   const getPhotos = async (albums) => {
     const promises = albums.map(({ id }) => {
-      return fetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
+      const url = `https://jsonplaceholder.typicode.com/albums/${id}/photos`;
+
+      return fetchWithTimeout(url, 15000)
         .then(res => res.json())
-        // Consult comments in App.js (lines 21-27 for details on error handling)
         .catch(error => {
-          if (error.response) {
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-          } else if (error.request) {
-            console.log(error.request);
-          } else {
-            console.log(error.message);
-          }
+          requestErrorHandler(error);
           setLoading(false);
-          setError(error.message)
+          setError(error.message);
         })
     })
     return Promise.all(promises)
@@ -89,7 +76,7 @@ const PhotoList = (props) => {
         <header className="error-header">
           <Link to="/">Return to previous page</Link>
         </header>
-        <div className="errorMsg">{`${error} 😞`}</div>
+        <div className="errorMsg">{`Error: ${error} 😞`}</div>
       </div>
     ) 
   } else return (
