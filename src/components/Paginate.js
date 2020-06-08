@@ -5,6 +5,7 @@ import '../styles/Paginate.css';
 const Paginate = ({ currentPage, photos, setCurrentPage }) => {
   return (
     <div className="Paginate">
+      {/* Moves to previous page */}
       <button className="prev-button" onClick={() => {
         if (currentPage > 1) {
           setCurrentPage(currentPage - 1);
@@ -14,6 +15,7 @@ const Paginate = ({ currentPage, photos, setCurrentPage }) => {
       </button>
       <span>
         Current Page:
+        {/* Allows for user to choose any page to skip to */}
         <select className="page-select" value={currentPage} onChange={(e) => setCurrentPage(Number(e.target.value))}> {/* string => number */}
           {photos.map((val, i) => {
             const countPage = i * 18;
@@ -25,6 +27,7 @@ const Paginate = ({ currentPage, photos, setCurrentPage }) => {
           })}
         </select>
       </span>
+      {/* Moves to next page */}
       <button className="next-button" onClick={() => {
         if (currentPage * 18 < photos.length) {
           setCurrentPage(currentPage + 1);

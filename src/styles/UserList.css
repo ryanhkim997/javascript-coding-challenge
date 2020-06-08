@@ -1,8 +1,7 @@
-/* .emptySearch {
-
+.emptySearch {
+  font-size: calc(10px + 1vmin);
+  margin: 1.5% 25%;
+  text-align: left;
+  right: 2%;
+  position: relative;
 }
-
-.UserList {
-  display: flex;
-  flex-direction: column;
-} */

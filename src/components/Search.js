@@ -11,7 +11,6 @@ const Search = ({ users, searchTerm, setRenderedUsers, handleSearch, setSearchTe
       <label>
           <input
           type="text"
-        //   className="searchInput" 
           placeholder="Search by User's Name"
           onChange={(e) => setSearchTerm(e.target.value)}
           />
