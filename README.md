@@ -76,9 +76,8 @@ Please list any assumptions or extra requirements you added to the application w
 
 - e.g. the JSONPlaceHolder Fake Online API service only allows me to query user's by user ID.
 
-- Refrained from building class components, instead opting for functional components and maintaining state through React Hooks
 - Opted to work with provided boilerplate code and not build out separate server-side functionality
-  - Thus, React Router (dependency 'react-router-dom') installed to enable client-side routing
+  - Thus, React Router (dependency 'react-router-dom') has been installed to enable client-side routing
 - Successful API calls to JSONPlaceHolder will always yield data with the same structure
   - JSONPlaceHolder API will support nested routes /users/userId/albums and /albums/albumId/photos
   - Since the request for photos is dependent on a successful request for albums, it is assumed that API requests will be successful and that JSONPlaceHolder is up and running
@@ -87,4 +86,5 @@ Please list any assumptions or extra requirements you added to the application w
   - As of 2:50AM PST on 6/8/20, Users 2 (Ernie Howell), 3 (Clementine Bauch), and 8 (Nicholas Runolfsdottir V) seem to be working as expected. All other users seem to have at least one failing API call when viewing their photos at this time, although these are subject to change.
   - After some manual testing, it seems that the PhotoList component can break the entire app and take an extremely long time to render if a single API call fails. Thus, it is assumed that API calls will be successfully made, or else rendering will take an egregious amount of time.
 - Search functionality assumes searching for consecutive letters separated by spaces will not be matched if the spaces are not included (e.g. search term 'ar' would NOT yield 'Glenna Reichert'; it would instead yield 'No Results').
-- Best viewed at ~1400-1500px x 875px
+- Assumes that the page will be viewed in web browser
+  - Best viewed at ~1400px x ~800px; responsiveness is extremely limited
